@@ -3,36 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OBS Display</title>
+    <title>OBS Control Panel</title>
     <style>
-        body { margin: 0; background-color: #000; color: #fff; }
-        .content { display: flex; justify-content: center; align-items: center; height: 100vh; }
-        img { max-width: 100%; max-height: 100%; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { margin: 10px; padding: 10px 20px; }
     </style>
 </head>
 <body>
-    <div class="content">
-        <img id="displayImage" src="" alt="Display Image">
-    </div>
+    <h1>Control Panel</h1>
+    <button onclick="sendUpdate()">Show YouTube Image</button>
     <script>
-        const ws = new WebSocket('ws://your-websocket-server-url:8080');
+        const ws = new WebSocket('ws://your-glitch-project-url.glitch.me');
 
-        ws.onmessage = event => {
-            const imageUrl = event.data;
-            document.getElementById('displayImage').src = imageUrl;
-        };
-
-        ws.onopen = () => {
-            console.log('Connected to WebSocket server');
-        };
-
-        ws.onerror = error => {
-            console.error('WebSocket error:', error);
-        };
-
-        ws.onclose = () => {
-            console.log('WebSocket connection closed');
-        };
+        function sendUpdate() {
+            const imageUrl = 'https://github.com/sunnyaugastin/finalthird/blob/3c9db16b9956bac16e037062ca122b46bcdf6ac5/YouTube.png?raw=true';
+            ws.send(imageUrl);
+        }
     </script>
 </body>
 </html>
